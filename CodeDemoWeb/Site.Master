@@ -1,0 +1,150 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="CodeDemoWeb.SiteMaster" %>
+
+<%@ Import Namespace="CodeDemoWeb" %>
+<%@ Import Namespace="Microsoft.AspNet.Identity" %>
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <link href="~/images/icon/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/materialize/materialize.min.css" />
+
+    <link rel="stylesheet" href="css/inovation/_style.css">
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <header>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo center"><i class="material-icons">settings_remote</i></a>
+                        <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+                                <ul class="right">
+                                    <li><a href="Account/Login.aspx" class="btn-floating btn-large"><i class="material-icons">lock</i></a></li>
+                                </ul>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <ul class="right">
+                                    <li>
+                                        <asp:LoginStatus ID="LoginStatus1" CssClass="btn-floating btn-large" runat="server" LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Default.aspx" LogoutText="<i class='material-icons'>power_settings_new</i>" OnLoggingOut="Unnamed_LoggingOut" />
+                                    </li>
+                                </ul>
+                            </LoggedInTemplate>
+
+                        </asp:LoginView>
+
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+
+        <main>
+
+            <div class="container">
+                <span id="_Top" style="padding-top: 80px"></span>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <div class="fixed-action-btn">
+                    <a onclick="ScrollToDIV(_Top)" class="btn-floating btn-large">
+                        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+                    </a>
+                    <%--<ul>
+								<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+								<li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+								<li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+								<li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+							</ul>--%>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text"><span id="_Company_Name" runat="server"></span></h5>
+                        <p class="grey-text text-lighten-4">
+                            <asp:HyperLink ID="hyperLink_Address" runat="server"></asp:HyperLink>
+                        </p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <%--<h5 class="white-text">Links</h5>--%>
+                        <ul>
+                            <li>
+                                <asp:HyperLink class="grey-text text-lighten-3" ID="hyperLink_Phone" runat="server"></asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink class="grey-text text-lighten-3" ID="hyperLink_Email" runat="server"></asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink class="grey-text text-lighten-3" ID="hyperLink_Facebook" runat="server"></asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink class="grey-text text-lighten-3" ID="hyperLink_Twitter" runat="server"></asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink class="grey-text text-lighten-3" ID="hyperLink_Instagram" runat="server"></asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink class="grey-text text-lighten-3" ID="hyperLink_WhatsApp" runat="server"></asp:HyperLink></li>
+                            <li>&nbsp;</li>
+                            <li><a class="grey-text text-lighten-3" href="Legal.aspx" target="_blank"><i class="fa fa-legal" aria-hidden="true"></i>&nbsp;&nbsp;Legal</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    Design by <a href="https://www.inovationware.com" target="_blank">inovationware</a> © <%: DateTime.Now.Year %>, All rights reserved.
+					<%--<a class="grey-text text-lighten-4 right" href="#!">More Links</a>--%>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+        <%--required for materialize componenets--%>
+        <script type="text/javascript">
+            M.AutoInit();
+        </script>
+
+        <script type="text/javascript">
+            function ScrollToDIV(div_) {
+                div_.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        </script>
+        <script src="js/functions/Alert.js"></script>
+        <script src="js/functions/CustomFunctions.js"></script>
+        <script src="js/functions/MakeCall.js"></script>
+        <script src="js/functions/AppSpecific.js"></script>
+        <script src="js/timers/Notify_.js"></script>
+    </form>
+</body>
+</html>
